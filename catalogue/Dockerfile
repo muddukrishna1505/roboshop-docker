@@ -2,7 +2,7 @@ FROM node:20
 #workdir creates /app and move to that directory
 WORKDIR /app
 COPY package.json .
-COPY *.json .
+COPY *.js .
 RUN npm install
 ENV MONGO_URL="mongodb://mongodb:27017/catalogue"\
     MONGO="true"
