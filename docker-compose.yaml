@@ -1,0 +1,23 @@
+name: roboshop
+services:
+  mongodb:
+    build: ./mongodb
+    image: muddukrishna1505/mongodb:v1  #docker build -t roboshop muddukrishna1505/mongodb:v1
+    container_name: mongodb #docker run -d --network roboshop muddukrishna1505/mongodb:v1
+  catalogue:
+    build: ./catalogue
+    image: muddukrishna1505/catalogue:v1
+    container_name: catalogue
+  frontend:
+    build: ./frontend
+    image: muddukrishna1505/frontend:v1
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - catalogue
+networks:
+    default:
+      name: roboshop
+      driver: bridge
+      external: false
