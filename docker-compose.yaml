@@ -46,6 +46,12 @@ services:
     container_name: mysql   
     environment:
       MYSQL_ROOT_PASSWORD: "RoboShop@1"
+  rabbitmq:
+    image: rabbitmq:3
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "roboshop"
+      RABBITMQ_DEFAULT_PASS: "roboshop@123"    
   frontend:
     build: ./frontend
     image: muddukrishna1505/frontend:v1
