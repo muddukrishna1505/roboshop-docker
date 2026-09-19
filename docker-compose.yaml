@@ -77,7 +77,9 @@ services:
     depends_on:
     - catalogue
     - user
-    - mysql
+    - cart
+    - shipping  
+    - payment
 networks:
     default:
       name: roboshop
