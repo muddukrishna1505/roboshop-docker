@@ -32,7 +32,13 @@ services:
       - catalogue  
   redis:
     image: redis:7
-    container_name: redis    
+    container_name: redis  
+  mysql:
+    build: ./mysql
+    image: muddukrishna1505/mysql:v1
+    container_name: mysql   
+    environment:
+      MYSQL_ROOT_PASSWORD: "RoboShop@1"
   frontend:
     build: ./frontend
     image: muddukrishna1505/frontend:v1
@@ -42,6 +48,7 @@ services:
     depends_on:
     - catalogue
     - user
+    - mysql
 networks:
     default:
       name: roboshop
