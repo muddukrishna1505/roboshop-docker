@@ -4,6 +4,8 @@ services:
     build: ./mongodb
     image: muddukrishna1505/mongodb:v1  #docker build -t roboshop muddukrishna1505/mongodb:v1
     container_name: mongodb #docker run -d --network roboshop muddukrishna1505/mongodb:v1
+    volumes:
+    - mongodb:/data/db
   catalogue:
     build: ./catalogue
     image: muddukrishna1505/catalogue:v1
@@ -55,19 +57,25 @@ services:
     - rabbitmq    
   redis:
     image: redis:7
-    container_name: redis  
+    container_name: redis 
+    volumes:
+    - redis:/data
   mysql:
     build: ./mysql
     image: muddukrishna1505/mysql:v1
     container_name: mysql   
     environment:
       MYSQL_ROOT_PASSWORD: "RoboShop@1"
+    volumes:
+    - mysql:/var/lib/mysql  
   rabbitmq:
     image: rabbitmq:3
     container_name: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: "roboshop"
-      RABBITMQ_DEFAULT_PASS: "roboshop123"    
+      RABBITMQ_DEFAULT_PASS: "roboshop123" 
+    volumes:
+    - rabbitmq:/var/lib/rabbitmq     
   frontend:
     build: ./frontend
     image: muddukrishna1505/frontend:v1
@@ -85,3 +93,8 @@ networks:
       name: roboshop
       driver: bridge
       external: false
+volumes:
+  mongodb: #docker volume create mongodb
+  redis: #docker volume create redis
+  mysql: #docker volume create mysql 
+  rabbitmq: #docker volume create rabbitmq 
